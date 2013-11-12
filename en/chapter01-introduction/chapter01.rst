@@ -32,19 +32,19 @@ Either way, let's talk about what Salt brings to the table that makes it my
 tool of choice.
 
 * The way Salt processes jobs is lightweight, as the server the work is to be
-performed on is completing the actions. This means that your ``Salt master``
-does very little work, it ensures things are put together properly, and then
-sends them to the minion, which then does the work (more on this later).
+  performed on is completing the actions. This means that your ``Salt master``
+  does very little work, it ensures things are put together properly, and then
+  sends them to the minion, which then does the work (more on this later).
 
 * Salt is stupidly fast thanks to ZeroMQ, and how data is broken down.
 
 * Salt is written in Python. If you can write Python, you can make Salt do
-what you need.
+  what you need.
 
 * As of writing this book Salt is completely open source. That means there's
-no corporate shennanigans to get in the way of getting things done.
+  no corporate shennanigans to get in the way of getting things done.
 * Salt uses Jinja2 and YAML, making it pretty easy to write even if you're a
-beginner.
+  beginner.
 
 
 Salt Basics
