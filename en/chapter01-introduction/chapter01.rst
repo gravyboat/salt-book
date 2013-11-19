@@ -43,6 +43,7 @@ tool of choice.
 
 * As of writing this book Salt is completely open source. That means there's
   no corporate shennanigans to get in the way of getting things done.
+
 * Salt uses Jinja2 and YAML, making it pretty easy to write even if you're a
   beginner.
 
@@ -61,7 +62,7 @@ are your ``Salt minions``. These machines are just all of the boxes that are
 part of your infrastructure, the ``Salt master`` itself can even be a
 ``Salt minion``!
 
-The transporation method used is ZeroMQ, it's fast efficient, and powerful.
+The transporation method used is ZeroMQ, it's fast, efficient, and powerful.
 
 With just the information introduced here we can get started with Salt. There
 are many more facets, but those don't need to be explained till we actually
@@ -73,8 +74,8 @@ How Salt Works
 
 Salt works by compiling the data you've presented it with into a dictionary.
 Once this dictionary is compiled, it creates a ``job ID`` for each server you
-are executing commands on, and then passes the dictionary to the 
-``Salt Minion``, and closes the connection. From here the ``Salt Minion``
+are executing commands on, then passes the dictionary to the 
+``Salt Minion``, and then releases the process. From here the ``Salt Minion``
 takes the dictionary, interprets it, and executes the commands. Once the run
 is complete (whether it has succeeeded or fails) the information is sent back
 to the ``Salt Master``, and the associated ``job ID`` is updated with the 
@@ -83,6 +84,16 @@ details.
 That's Salt in the simplest terms, and it's really all you need to know for
 right this moment. The key thing to take away is the fact that Salt does NOT
 process commands on the ``Salt master``, that job is left to the
-``Salt minion``. It's also important to understand that Salt closes
-connections to the ``Salt minion``, and then simply waits to hear back to
+``Salt minion``. It's also important to understand that Salt does not leave
+processes to the ``Salt minion`` hanging. It simply waits to hear back to
 update the ``job ID``.
+
+
+What you need before starting this book
+=======================================
+
+You're going to need some sort of environment to work on Salt in. Each chapter
+will build on the infrastructure of the previous chapter, so you'll either
+need to create local VMs, or VMs on your favorite provider. This book
+currently only covers Debian and RHEL based distros, if you'd like to
+experiment with others you are more than welcome to do so.
