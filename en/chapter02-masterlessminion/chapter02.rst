@@ -12,8 +12,8 @@ with this chapter you'll have a simple web server set up that actually shows
 a static web page.
 
 
-Setting Up The Minion
-=====================
+Setting Up The Salt Minion
+==========================
 
 RHEL Distros
 ------------
@@ -27,8 +27,8 @@ Running Your First Local Commands
 =================================
 
 
-Writing Your First State File
-=============================
+Writing Your First State File and a YAML Intro
+==============================================
 
 
 Writing Your First Top File
