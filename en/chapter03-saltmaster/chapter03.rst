@@ -35,6 +35,9 @@ Moving The Salt States and Top File
 Introduction to Pillars
 =======================
 
+Introduction to Jinja2
+======================
+
 
 Chapter Challenge
 =================

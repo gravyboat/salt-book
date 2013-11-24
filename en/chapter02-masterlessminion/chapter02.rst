@@ -23,8 +23,8 @@ Debian Distros
 --------------
 
 
-Running Your First Local Commands
-=================================
+Running Your First Local Commands Using Salt Modules
+====================================================
 
 
 Writing Your First State File and a YAML Intro
