@@ -18,6 +18,25 @@ Setting Up The Salt Minion
 RHEL Distros
 ------------
 
+Unless you're using Fedora we'll need to install the EPEL repository. You'll
+either do this via running:
+
+.. code-block:: bash
+
+    yum --enablerepo=epel-testing install salt-minion
+
+If for some reason that doesn't work, you'll have to set up the repo:
+
+.. code-block:: bash
+
+    install the repo via RPM
+
+While installing the EPEL repo you may get a key error, if so, download the
+latest key:
+
+.. code-block:: bash
+
+    install the key
 
 Debian Distros
 --------------
