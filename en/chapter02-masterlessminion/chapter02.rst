@@ -25,11 +25,13 @@ either do this via running:
 
     yum --enablerepo=epel-testing install salt-minion
 
+
 If for some reason that doesn't work, you'll have to set up the repo:
 
 .. code-block:: bash
 
-    install the repo via RPM
+    rpm -Uvh http://ftp.linux.ncsu.edu/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+
 
 While installing the EPEL repo you may get a key error, if so, download the
 latest key:
@@ -42,8 +44,22 @@ Debian Distros
 --------------
 
 
+So now that our ``Salt Minion`` is installed, we need to start the service up.
+It should have already started when you installed the package, but in the
+event it has not, run the following command:
+
+.. code-block:: bash
+
+    service salt-minion start
+
+
 Running Your First Local Commands Using Salt Modules
 ====================================================
+
+When running Salt locally (without a master), we'll be using the ``salt-call``
+command. This command is specifically used to run calls on the minion
+itself instead of executing them from the master.
+
 
 
 Writing Your First State File and a YAML Intro
