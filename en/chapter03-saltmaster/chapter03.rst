@@ -13,6 +13,10 @@ server, and a single ``minion`` that you can control from the master.
 Setting Up the Salt Master
 ==========================
 
+Keep in mind we'll be building on the previous things we've done, however for
+the sake of avoiding swapping between pages the instructions on how to add
+repositories is also included here.
+
 RHEL Distros
 ------------
 
@@ -34,6 +38,7 @@ Moving The Salt States and Top File
 
 Introduction to Pillars
 =======================
+
 
 Introduction to Jinja2
 ======================
