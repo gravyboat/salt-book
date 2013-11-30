@@ -27,9 +27,26 @@ Debian Distros
 Configuring Our Salt Minion To Recognize the Salt Master
 ========================================================
 
+Once you've installed your Salt Master, it's time to configure the minion to
+connect to the master server. This process is quite straight forward, but
+we'll need to make sure that ports 4505, and 4506 are open on the master. If
+you aren't familiar with how to do this, there are instructions below.
+
+RHEL Distros
+------------
+
+Debian Distros
+--------------
+
+
+We now need to modify the /etc/salt/minion file on the Salt minion. This will
+allow us to point our minion at the master, so we can start the authentication
+process.
 
 Accepting Keys From the Salt Minion
 ===================================
+
+
 
 
 Moving The Salt States and Top File
