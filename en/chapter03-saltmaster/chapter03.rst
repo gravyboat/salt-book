@@ -63,3 +63,6 @@ Introduction to Jinja2
 
 Chapter Challenge
 =================
+
+1. Create a second minion, and join it to the ``Salt Master``. Configure
+this minion 
