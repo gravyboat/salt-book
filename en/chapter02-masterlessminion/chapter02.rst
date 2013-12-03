@@ -60,6 +60,24 @@ When running Salt locally (without a master), we'll be using the ``salt-call``
 command. This command is specifically used to run calls on the minion
 itself instead of executing them from the master.
 
+We'll begin with an easy example, with a simple package installation. To do
+this run the following command:
+
+.. code-block:: bash
+
+    salt-call --local pkg.install vim
+
+
+Ok so let's break this down, ``salt-call`` was explained above, but when you
+look at the ``--local`` option it seems as though this is a duplicate of
+``salt-call``. The key item to remember with ``salt-call`` is that you're
+executing FROM the minion, you can still rely on data from the master. The
+``--local`` option is specifically to run ``salt-call`` locally, as if there
+was no master running. ``pkg.install`` does exactly what it sounds like, it
+installs a pkg. Keep in mind that when you run something like this from the
+command line, you're using the module. From there we simply provide the
+command with an option (in this case ``vim``) for what we want to install.
+
 
 The difference between Salt States, and Salt Modules
 ====================================================
@@ -68,8 +86,8 @@ One of the most confusing parts of Salt for new users is the difference
 between a ``module`` and a ``state``? Think of a module as the underlying
 layer of actions to be performed, and the states invoke them. So this brings
 about another question, why is everything that occurs in a module not
-supported in a state? The reasoning behind this is that some things simply
-don't belong in states, or they wouldn't work correctly. 
+supported in a state (or vice versa)? The reasoning behind this is that some
+things simply don't belong in states, or they wouldn't work correctly.
 
 A vast majority of actions that Salt performs are completed in States, and that
 is what 90% of what you're going to write commands of will be. We aren't going
