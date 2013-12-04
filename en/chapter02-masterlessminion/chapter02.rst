@@ -65,7 +65,7 @@ this run the following command:
 
 .. code-block:: bash
 
-    salt-call --local pkg.install vim
+    salt-call --local pkg.install vim-enhanced
 
 
 Ok so let's break this down, ``salt-call`` was explained above, but when you
@@ -76,7 +76,8 @@ executing FROM the minion, you can still rely on data from the master. The
 was no master running. ``pkg.install`` does exactly what it sounds like, it
 installs a pkg. Keep in mind that when you run something like this from the
 command line, you're using the module. From there we simply provide the
-command with an option (in this case ``vim``) for what we want to install.
+command with an option (in this case ``vim-enhanced``) for what we want to
+install.
 
 
 The difference between Salt States, and Salt Modules
@@ -99,14 +100,14 @@ exist for something that seems similar, so there's the pkg module, and the pkg
 state. Be aware of what you're looking at, otherwise you might use
 functionality that doesn't exist in a state!
 
-Writing Your First State File and a YAML Intro
-==============================================
+Writing Your First State Files and a YAML Intro
+===============================================
 
 Before we get too deep into state files, let's take a look at some YAML syntax
 with a very simple state example:
 
 
-In this state we're simply installing a package, it isn't very complex so that
+In this state we're simply installing a package , it isn't very complex so that
 should make it easier to understand what is going on within the state itself.
 As you can see above, we use the ``:`` to denote a sub-section, or an
 associated value of some kind, everything is indented two spaces for the
@@ -116,6 +117,24 @@ should make it easier to see,
 
 Writing Your First Top File
 ===========================
+
+The top file (top.sls) is quite simple in what it is, and how it works. This
+is simply a file that says 'apply these states, to these machines'. It's also
+formatted with YAML, and operates similarly to a state file. Add this example
+to your server under /srv/salt/top.sls:
+
+
+
+Chapter Overview
+================
+
+So we've gotten into the basics regarding states, top files, and YAML. At this
+point you're probably saying 'jeez this seems pretty easy', and that's because
+what we've done so far is very easy. Work through the chapter challenge below
+and ensure that it works before going forward, you may need to head online to
+the Salt docs to take a look at how some of these work, if you get stuck feel
+free to review the repository (REPO LINK HERE), as it includes the solution to
+the chapter challenge.
 
 
 Chapter Challenge
