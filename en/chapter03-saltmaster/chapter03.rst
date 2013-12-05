@@ -46,8 +46,40 @@ process.
 Accepting Keys From the Salt Minion
 ===================================
 
+Once you've completed configuring the Salt Minion, you need to access the Salt
+Master. Once there, as the root user run the following command:
+
+.. code-block:: bash
+
+    salt-key -L
 
 
+When you run this command you should see something similar to the following:
+
+.. code-block:: bash
+
+    return data from salt-key command
+
+
+When we use a capital ``L`` for the salt-key command, this says to list all
+keys, both those accepted, and those waiting to be accept. We now need to 
+accept the key, use the following command to do so:
+
+.. code-block:: bash
+
+    salt-key -a serverName
+
+
+Now if you run ``salt-key -L`` again, you'll see that the minion is now an
+accepted server. To test this out we'll run the simplest command we can from
+the master to test connectivity:
+
+.. code-block:: bash
+
+    salt '*' test.ping
+
+This simply has the minion return information via ZeroMQ that it is indeed
+connected to the master
 
 Moving The Salt States and Top File
 ===================================
