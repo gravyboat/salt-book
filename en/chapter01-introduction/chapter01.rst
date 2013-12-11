@@ -44,8 +44,8 @@ tool of choice.
 * As of writing this book Salt is completely open source. That means there's
   no corporate shennanigans to get in the way of getting things done.
 
-* Salt uses Jinja2 and YAML, making it pretty easy to write even if you're a
-  beginner.
+* Salt uses Jinja2 (or Mako) and YAML, making it pretty easy to write even if
+  you're a beginner.
 
 
 Salt Basics
