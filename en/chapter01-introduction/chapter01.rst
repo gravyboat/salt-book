@@ -75,7 +75,8 @@ How Salt Works
 Salt works by compiling the data you've presented it with into a dictionary.
 Once this dictionary is compiled, it creates a ``job ID`` for each server you
 are executing commands on, then passes the dictionary to the 
-``Salt Minion``, and then releases the process. From here the ``Salt Minion``
+``Salt Minion``, and then releases the process (note that the zeromq
+connection continues to be established). From here the ``Salt Minion``
 takes the dictionary, interprets it, and executes the commands. Once the run
 is complete (whether it has succeeeded or fails) the information is sent back
 to the ``Salt Master``, and the associated ``job ID`` is updated with the 
