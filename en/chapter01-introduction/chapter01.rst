@@ -59,13 +59,13 @@ infrastructure is configured.
 
 All of the servers which will be accepting commands, or changing configuration
 are your ``Salt minions``. These machines are just all of the boxes that are
-part of your infrastructure, the ``Salt master`` itself can even be a
-``Salt minion``!
+part of your infrastructure (web servers, database servers, etc.), the
+``Salt master`` itself can even be a ``Salt minion``!
 
 The transporation method used is ZeroMQ, it's fast, efficient, and powerful.
 
 With just the information introduced here we can get started with Salt. There
-are many more facets, but those don't need to be explained till we actually
+are many more facets, but those don't need to be explained until we actually
 use them.
 
 

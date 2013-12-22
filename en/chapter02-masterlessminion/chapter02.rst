@@ -32,6 +32,10 @@ If for some reason that doesn't work, you'll have to set up the repo:
 
     rpm -Uvh http://ftp.linux.ncsu.edu/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 
+.. note::
+
+    If you're on RHEL you'll need to enable the 'optional' repo, this is due
+    to a naming issue of with Jinja2.
 
 While installing the EPEL repo you may get a key error, if so, download the
 latest key:
@@ -52,6 +56,8 @@ event it has not, run the following command:
 
     service salt-minion start
 
+Our setup is now functional, and we can start running commands!
+
 
 Running Your First Local Commands Using Salt Modules
 ====================================================
@@ -67,18 +73,16 @@ this run the following command:
 
     salt-call --local pkg.install vim-enhanced
 
-
 Ok so let's break this down, ``salt-call`` was explained above, but when you
 look at the ``--local`` option it seems as though this is a duplicate of
 ``salt-call``. The key item to remember with ``salt-call`` is that you're
-executing FROM the minion, you can still rely on data from the master. The
+executing FROM the minion, yet you can still rely on data from the master. The
 ``--local`` option is specifically to run ``salt-call`` locally, as if there
 was no master running. ``pkg.install`` does exactly what it sounds like, it
 installs a pkg. Keep in mind that when you run something like this from the
 command line, you're using the module. From there we simply provide the
 command with an option (in this case ``vim-enhanced``) for what we want to
 install.
-
 
 The difference between Salt States, and Salt Modules
 ====================================================
@@ -91,7 +95,7 @@ supported in a state (or vice versa)? The reasoning behind this is that some
 things simply don't belong in states, or they wouldn't work correctly.
 
 A vast majority of actions that Salt performs are completed in States, and that
-is what 90% of what you're going to write commands of will be. We aren't going
+is what 90% of what you're going to write will be. We aren't going
 to focus too heavily on modules as they aren't used that often, modules are
 most often used for one off commands, and troubleshooting, which we'll cover
 later. The main take away here is to make sure when you're looking at the Salt
@@ -106,13 +110,26 @@ Writing Your First State Files and a YAML Intro
 Before we get too deep into state files, let's take a look at some YAML syntax
 with a very simple state example:
 
+.. code-block:: yaml
 
-In this state we're simply installing a package , it isn't very complex so that
-should make it easier to understand what is going on within the state itself.
-As you can see above, we use the ``:`` to denote a sub-section, or an
-associated value of some kind, everything is indented two spaces for the
-sub-sections. Most text editors support some sort of YAML implementation which
-should make it easier to see, 
+    nginx:
+      pkg:
+        - installed
+      service:
+        - running
+        - enable: True
+
+In this state we're simply installing a package, and starting the service. It
+isn't very complex so that should make it easier to understand what is going
+on within the state itself. As you can see above, we use the ``:`` to denote a
+sub-section, or an associated value of some kind, everything is indented two
+spaces for the sub-sections. Most text editors support some sort of YAML 
+implementation which should make it easier to see what is going on.
+
+We're specifying the item to be installed as nginx, from here, we want the
+status of the package to be installed, and the service to be running, and
+enabled. It's very simple to see what's going on. Keep in mind that states
+can become very complex.
 
 
 Writing Your First Top File
@@ -140,13 +157,23 @@ the chapter challenge.
 Chapter Challenge
 =================
 
-1. Configure the masterless minion to have a secondary HTML file, and ensure
+1. Review the pkg module documentation
+(http://docs.saltstack.com/ref/modules/all/salt.modules.pkg.html), and compare
+it to the pkg state documentation
+(http://docs.saltstack.com/ref/states/all/salt.states.pkg.html), note the
+differences in both the documentation, and the functionality.
+
+2. Review some of the example projects where Salt is used
+(http://docs.saltstack.com/topics/salt_projects.html), and try to see what's
+going on, make some notes regarding what you don't understand.
+
+3. Configure the masterless minion to have a secondary HTML file, and ensure
 that the Nginx service watches this file. What do you notice is problematic
 about these service watch commands? Review
 http://docs.saltstack.com/ref/states/requisites.html to see if there's a more
 efficient way we could take advantage of watch, or it's alternatives.
 
-2. Create an additional directory structure for Python, and create the
+4. Create an additional directory structure for Python, and create the
 necessary states to install virtualenv and pip. Do these all belong in the
 same state? Think carefully on what our directory structure should look like
-to ensure these are as modular as possible.
+to ensure these are as modular as possible so we can use them repeatedly.
