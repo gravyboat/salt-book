@@ -131,6 +131,25 @@ status of the package to be installed, and the service to be running, and
 enabled. It's very simple to see what's going on. Keep in mind that states
 can become very complex.
 
+Since we want to use this nginx state, let's put it inside of
+``/srv/salt/nginx/init.sls``. When we name something 'init' it means that Salt
+will treat the directory it sits in as the name, so if I wanted to use this
+init, I would simply reference nginx like so:
+
+.. code-block:: yaml
+
+    salt-call --local state.sls nginx
+
+If we had placed this file within ``/srv/salt/nginx/package.sls``, we would
+reference it like this:
+
+.. code-block:: yaml
+
+    salt-call --local state.sls nginx.package
+
+Easy to understand right? We're simply replacing the directory (``/``) with a
+dot.
+
 
 Writing Your First Top File
 ===========================
@@ -138,9 +157,20 @@ Writing Your First Top File
 The top file (top.sls) is quite simple in what it is, and how it works. This
 is simply a file that says 'apply these states, to these machines'. It's also
 formatted with YAML, and operates similarly to a state file. Add this example
-to your server under /srv/salt/top.sls:
+to your server under ``/srv/salt/top.sls``:
 
+.. code-block:: yaml
 
+    base:
+      '*':
+        nginx
+
+So let's look at what's going on here, we have our base environment(more on
+environments later), and as part of that environment, we match ALL systems.
+The star represents every server that Salt knows about. Since that is
+currently only one system, this would represent one machine. The last section
+(remember our indenting, and that ':' represents that an item has sub items),
+indicates that we want to apply the nginx state to the servers in question.
 
 Chapter Overview
 ================
