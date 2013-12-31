@@ -31,6 +31,7 @@ If for some reason that doesn't work, you'll have to set up the repo:
 .. code-block:: bash
 
     rpm -Uvh http://ftp.linux.ncsu.edu/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+    yum clean all; yum install salt-minion
 
 .. note::
 

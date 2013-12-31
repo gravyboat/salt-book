@@ -20,6 +20,26 @@ repositories is also included here.
 RHEL Distros
 ------------
 
+Unless you're using Fedora we'll need to install the EPEL repository. You'll
+either do this via running:
+
+.. code-block:: bash
+
+    yum --enablerepo=epel-testing install salt-master
+
+
+If for some reason that doesn't work, you'll have to set up the repo:
+
+.. code-block:: bash
+
+    rpm -Uvh http://ftp.linux.ncsu.edu/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+    yum clean all; yum install salt-master
+
+.. note::
+
+    If you're on RHEL you'll need to enable the 'optional' repo, this is due
+    to a naming issue of with Jinja2.
+
 Debian Distros
 --------------
 
