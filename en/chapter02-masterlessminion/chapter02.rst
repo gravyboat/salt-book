@@ -48,6 +48,25 @@ latest key:
 Debian Distros
 --------------
 
+In ``/etc/apt/sources.list``, or a file within ``/etc/apt/sources.list.d`` if
+you prefer, add the following line:
+
+.. code-block:: bash
+    
+    deb http://debian.saltstack.com/debian wheezy-saltstack main
+
+From there import the repository key:
+
+.. code-block:: bash
+
+    wget -q -O- "http://debian.saltstack.com/debian-salt-team-joehealy.gpg.key" | apt-key add -
+
+Update the database, and install the minion:
+
+.. code-block:: bash
+
+    apt-get update
+    apt-get install salt-minion
 
 So now that our ``Salt Minion`` is installed, we need to start the service up.
 It should have already started when you installed the package, but in the

@@ -43,6 +43,25 @@ If for some reason that doesn't work, you'll have to set up the repo:
 Debian Distros
 --------------
 
+In ``/etc/apt/sources.list``, or a file within ``/etc/apt/sources.list.d`` if
+you prefer, add the following line:
+
+.. code-block:: bash
+    
+    deb http://debian.saltstack.com/debian wheezy-saltstack main
+
+From there import the repository key:
+
+.. code-block:: bash
+
+    wget -q -O- "http://debian.saltstack.com/debian-salt-team-joehealy.gpg.key" | apt-key add -
+
+Update the database, and install the minion:
+
+.. code-block:: bash
+
+    apt-get update
+    apt-get install salt-minion
 
 Configuring Our Salt Minion To Recognize the Salt Master
 ========================================================
