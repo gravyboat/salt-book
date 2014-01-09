@@ -47,6 +47,8 @@ tool of choice.
 * Salt uses Jinja2 (or Mako) and YAML, making it pretty easy to write even if
   you're a beginner.
 
+* Salt has a large number of pre-written ``formulas`` which will help you get
+  up and running quickly.
 
 Salt Basics
 ===========
