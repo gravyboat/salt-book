@@ -36,7 +36,8 @@ tool of choice.
   does very little work, it ensures things are put together properly, and then
   sends them to the minion, which then does the work (more on this later).
 
-* Salt is stupidly fast thanks to ZeroMQ, and how data is broken down.
+* Salt is stupidly fast thanks to ZeroMQ, and how data is broken down. It uses
+  PUB/SUB to broadcast data out.
 
 * Salt is written in Python. If you can write Python, you can make Salt do
   what you need.
@@ -47,6 +48,8 @@ tool of choice.
 * Salt uses Jinja2 (or Mako) and YAML, making it pretty easy to write even if
   you're a beginner.
 
+* Salt has a large number of pre-written ``formulas`` which will help you get
+  up and running quickly.
 
 Salt Basics
 ===========
