@@ -49,7 +49,8 @@ tool of choice.
   you're a beginner.
 
 * Salt has a large number of pre-written ``formulas`` which will help you get
-  up and running quickly.
+  up and running quickly. Those are available here: 
+  https://github.com/saltstack-formulas.
 
 Salt Basics
 ===========
