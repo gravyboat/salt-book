@@ -1,7 +1,7 @@
 Introduction and What To Expect
 ===============================
 
-Hello, and welcome to 'Salt Book'! I thought it would be best to start by
+Hello, and welcome to Get Salted! I thought it would be best to start by
 explaining how this book operates, and how we're going to progress through
 learning Salt. This book is for beginner and intermediate users, we aren't
 going to get into some of the very advanced or obscure topics of Salt, but
@@ -20,7 +20,7 @@ building. If you're looking for a more terse manual, then please review the
 existing Salt documentation, which while extremely thorough, isn't going to
 walk you through from installation to running application like this book will.
 If you're looking to build something with Salt then this is the book for you.
- 
+
 
 What Makes Salt Awesome
 =======================
@@ -51,6 +51,10 @@ tool of choice.
 * Salt has a large number of pre-written ``formulas`` which will help you get
   up and running quickly. Those are available here: 
   https://github.com/saltstack-formulas.
+
+* Salt supports both remote exeuction, as well as 'instruction' style commands
+  that can be applied on a larger scale from one machine, to ten thousand.
+
 
 Salt Basics
 ===========
