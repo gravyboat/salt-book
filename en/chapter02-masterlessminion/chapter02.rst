@@ -2,7 +2,7 @@ The Masterless Minion
 =====================
 
 The simplest configuration to get started with is the ``masterless minion``.
-This is simply a minion server, where you call all of your commands, as well
+This is simply a minion server where you call all of your commands as well
 as configuration files locally. This server does not use key authentication,
 since it's just the ``minion`` itself. What makes this a great starting place
 for this book is that the ``masterless minion`` takes about 5 minutes to set
@@ -14,6 +14,17 @@ a static web page.
 
 Setting Up The Salt Minion
 ==========================
+
+There are multiple ways to set up the Salt minion. The quickest way to do so
+is to use the salt bootstrap script:
+
+.. code-block:: bash
+
+    curl -L http://bootstrap.saltstack.org | sudo sh
+
+This method allows you to quickly install the Salt minion onto a given machine.
+In the event you wish to use a repository, examples have been provided below
+which explain how to install the minion on RHEL and Debian distros.
 
 RHEL Distros
 ------------
@@ -98,31 +109,35 @@ look at the ``--local`` option it seems as though this is a duplicate of
 ``salt-call``. The key item to remember with ``salt-call`` is that you're
 executing FROM the minion, yet you can still rely on data from the master. The
 ``--local`` option is specifically to run ``salt-call`` locally, as if there
-was no master running. ``pkg.install`` does exactly what it sounds like, it
-installs a pkg. Keep in mind that when you run something like this from the
-command line, you're using the module. From there we simply provide the
-command with an option (in this case ``vim-enhanced``) for what we want to
-install.
+was no master running. This means that all the data and configuration will be
+pulled from the minion itself. ``pkg.install`` does exactly what it sounds
+like, it installs a pkg. Keep in mind that when you run something like this
+from the command line, you're using the ``execution module``. From there we
+simply provide the command with an option (in this case ``vim-enhanced``)
+for what we want to install.
 
 The difference between Salt States, and Salt Modules
 ====================================================
 
 One of the most confusing parts of Salt for new users is the difference
-between a ``module`` and a ``state``? Think of a module as the underlying
-layer of actions to be performed, and the states invoke them. So this brings
-about another question, why is everything that occurs in a module not
+between an ``execution module`` and a ``state module``. Think of an
+``exeuction module`` as the underlying layer of actions to be performed, and
+the ``state modules`` invoke them. These different types of modules are
+commonly referred to as states, and modules (or execution modules). This can be
+confusing as a state contains multiple ``state modules``. So this
+brings about another question, why is everything that occurs in a module not
 supported in a state (or vice versa)? The reasoning behind this is that some
 things simply don't belong in states, or they wouldn't work correctly.
 
 A vast majority of actions that Salt performs are completed in States, and that
 is what 90% of what you're going to write will be. We aren't going
-to focus too heavily on modules as they aren't used that often, modules are
-most often used for one off commands, and troubleshooting, which we'll cover
-later. The main take away here is to make sure when you're looking at the Salt
-documentation that you recognize that both Module and State documentation can
+to focus too heavily on ``execution modules``. Modules are most often used for
+one off commands. and troubleshooting which we'll cover later. The main take
+away here is to make sure when you're looking at the Salt documentation that
+you recognize that both Module and State documentation can
 exist for something that seems similar, so there's the pkg module, and the pkg
-state. Be aware of what you're looking at, otherwise you might use
-functionality that doesn't exist in a state!
+state module. Be aware of what you're looking at, otherwise you might try to
+use functionality that doesn't exist in a state!
 
 Writing Your First State Files and a YAML Intro
 ===============================================
