@@ -30,14 +30,14 @@ RHEL Distros
 ------------
 
 Unless you're using Fedora we'll need to install the EPEL repository. You'll
-either do this via running:
+do this via running:
 
 .. code-block:: bash
 
     yum --enablerepo=epel-testing install salt-minion
 
 
-If for some reason that doesn't work, you'll have to set up the repo:
+If for some reason that doesn't work, you'll have to set up the repo manually:
 
 .. code-block:: bash
 
@@ -135,9 +135,17 @@ to focus too heavily on ``execution modules``. Modules are most often used for
 one off commands. and troubleshooting which we'll cover later. The main take
 away here is to make sure when you're looking at the Salt documentation that
 you recognize that both Module and State documentation can
-exist for something that seems similar, so there's the pkg module, and the pkg
-state module. Be aware of what you're looking at, otherwise you might try to
-use functionality that doesn't exist in a state!
+exist for something that seems similar, so there's the pkg module
+documentation which looks like this: 
+
+http://docs.saltstack.com/en/latest/ref/states/all/salt.states.pkg.html
+
+And the pkg state module which looks like this:
+
+http://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.pkg.html
+
+Be aware of what you're looking at, otherwise you might try to use
+functionality that doesn't exist in a state.
 
 Writing Your First State Files and a YAML Intro
 ===============================================
