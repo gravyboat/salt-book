@@ -109,7 +109,7 @@ look at the ``--local`` option it seems as though this is a duplicate of
 ``salt-call``. The key item to remember with ``salt-call`` is that you're
 executing FROM the minion, yet you can still rely on data from the master. The
 ``--local`` option is specifically to run ``salt-call`` locally, as if there
-was no master running. This means that all the data and configuration will be
+was no master running. This means that all data and configuration will be
 pulled from the minion itself. ``pkg.install`` does exactly what it sounds
 like, it installs a pkg. Keep in mind that when you run something like this
 from the command line, you're using the ``execution module``. From there we
