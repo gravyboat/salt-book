@@ -171,8 +171,7 @@ implementation which should make it easier to see what is going on.
 
 We're specifying the item to be installed as nginx, from here, we want the
 status of the package to be installed, and the service to be running, and
-enabled. It's very simple to see what's going on. Keep in mind that states
-can become very complex.
+enabled. Keep in mind that states can become very complex.
 
 Since we want to use this nginx state, let's put it inside of
 ``/srv/salt/nginx/init.sls``. When we name something 'init' it means that Salt
