@@ -13,8 +13,8 @@ server, and a single ``minion`` that you can control from the master.
 Setting Up the Salt Master
 ==========================
 
-Keep in mind we'll be building on the previous things we've done, however for
-the sake of avoiding swapping between pages the instructions on how to add
+Keep in mind we'll be building on the previous tasks we've completed, however
+for the sake of avoiding swapping between pages the instructions on how to add
 repositories is also included here.
 
 RHEL Distros
@@ -63,35 +63,53 @@ Update the database, and install the minion:
     apt-get update
     apt-get install salt-minion
 
-Configuring Our Salt Minion To Recognize the Salt Master
-========================================================
+Configuring Our Salt Minion and Salt Master for connectivity
+============================================================
 
 Once you've installed your Salt Master, it's time to configure the minion to
 connect to the master server. This process is quite straight forward, but
 we'll need to make sure that ports 4505, and 4506 are open on the master. If
-you aren't familiar with how to do this, there are instructions below.
+you aren't familiar with how to do this, there are instructions below (you may
+need elevated privileges to run these commands):
 
-RHEL Distros
-------------
+iptables
+---------
 
-Debian Distros
---------------
+iptables -A INPUT -p tcp --dport 4505 -j ACCEPT
+iptables -A INPUT -p tcp --dport 4506 -j ACCEPT
 
+Confirm that you can telnet from the minion to the master on those ports, if
+you are having issues you may need to ensure that the iptables filtering is
+configured properly so that this chain is encountered prior to dropping all
+packets.
 
 We now need to modify the /etc/salt/minion file on the Salt minion. This will
 allow us to point our minion at the master, so we can start the authentication
 process.
 
+The minion conf
+---------------
+
+Open the /etc/salt/minion conf with your preferred editor, and find the line
+that says ``#master: salt``. You'll want to uncomment this line, and change
+the value of master to either your master server's IP address, or the server's
+name depending on how your network is configured. Once you've done this, save
+the file, and restart the minion with ``service salt-minion restart``, again
+this may require escalated privileges if you aren't the root user.
+
+Ok, our minion now has a basic configuration, and should be able to talk to
+our Salt master, if it seems easy that's because it is supposed to be.
+
 Accepting Keys From the Salt Minion
 ===================================
 
-Once you've completed configuring the Salt Minion, you need to access the Salt
-Master. Once there, as the root user run the following command:
+Once you've completed configuring the Salt Minion, you'll need to tell your
+Salt master that you want to allow this minion to connect. Log onto the salt
+master, and as the root user, or a user with sudo run the following command:
 
 .. code-block:: bash
 
     salt-key -L
-
 
 When you run this command you should see something similar to the following:
 
@@ -109,16 +127,17 @@ accept the key, use the following command to do so:
     salt-key -a serverName
 
 
-Now if you run ``salt-key -L`` again, you'll see that the minion is now an
-accepted server. To test this out we'll run the simplest command we can from
-the master to test connectivity:
+Now if you run ``salt-key -L`` again, you'll see that the minion is now 
+accepted. To test this out we'll run the simplest command we can from
+the master to confirm connectivity:
 
 .. code-block:: bash
 
     salt '*' test.ping
 
-This simply has the minion return information via ZeroMQ that it is indeed
-connected to the master
+We're using the salt command here to confirm connectivity by targeting all
+('*') machines, and running test.ping against them. This simply confirms
+the system is available via a ZeroMQ connection.
 
 Moving The Salt States and Top File
 ===================================
