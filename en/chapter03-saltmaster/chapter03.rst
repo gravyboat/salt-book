@@ -142,6 +142,11 @@ the system is available via a ZeroMQ connection.
 Moving The Salt States and Top File
 ===================================
 
+At this point we need to move our top file and states over to the master
+server. These files will exist in the exact same location that they
+currently exist on the minion, so scp the files over, and see if you can
+apply them to the minion.
+
 
 Introduction to Pillars
 =======================
