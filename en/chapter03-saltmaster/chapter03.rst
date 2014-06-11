@@ -151,6 +151,8 @@ apply them to the minion.
 Introduction to Pillars
 =======================
 
+Pillars are a way which we store data within in Salt that we may need to keep
+secure.
 
 Introduction to Jinja2
 ======================
