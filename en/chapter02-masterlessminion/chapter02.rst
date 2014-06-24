@@ -76,8 +76,7 @@ Update the database, and install the minion:
 
 .. code-block:: bash
 
-    apt-get update
-    apt-get install salt-minion
+    apt-get update; apt-get install salt-minion
 
 So now that our ``Salt Minion`` is installed, we need to start the service up.
 It should have already started when you installed the package, but in the
@@ -88,7 +87,6 @@ event it has not, run the following command:
     service salt-minion start
 
 Our setup is now functional, and we can start running commands!
-
 
 Running Your First Local Commands Using Salt Modules
 ====================================================
@@ -122,7 +120,7 @@ The difference between Salt States, and Salt Modules
 One of the most confusing parts of Salt for new users is the difference
 between an ``execution module`` and a ``state module``. Think of an
 ``exeuction module`` as the underlying layer of actions to be performed, and
-the ``state modules`` invoke them. These different types of modules are
+the ``state modules`` invokes them. These different types of modules are
 commonly referred to as states, and modules (or execution modules). This can be
 confusing as a state contains multiple ``state modules``. So this
 brings about another question, why is everything that occurs in a module not
@@ -132,11 +130,11 @@ things simply don't belong in states, or they wouldn't work correctly.
 A vast majority of actions that Salt performs are completed in States, and that
 is what 90% of what you're going to write will be. We aren't going
 to focus too heavily on ``execution modules``. Modules are most often used for
-one off commands. and troubleshooting which we'll cover later. The main take
+one off commands and troubleshooting which we'll cover later. The main take
 away here is to make sure when you're looking at the Salt documentation that
-you recognize that both Module and State documentation can
-exist for something that seems similar, so there's the pkg module
-documentation which looks like this: 
+you recognize that both Module and State documentation can exist for something
+that seems similar, so there's the pkg module documentation which looks like
+this: 
 
 http://docs.saltstack.com/en/latest/ref/states/all/salt.states.pkg.html
 
@@ -145,7 +143,8 @@ And the pkg state module which looks like this:
 http://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.pkg.html
 
 Be aware of what you're looking at, otherwise you might try to use
-functionality that doesn't exist in a state.
+functionality that doesn't exist in a ``state module`` but does exist in an
+``execution module``.
 
 Writing Your First State Files and a YAML Intro
 ===============================================
@@ -190,8 +189,7 @@ reference it like this:
     salt-call --local state.sls nginx.package
 
 Easy to understand right? We're simply replacing the directory (``/``) with a
-dot.
-
+dot and remove the extension.
 
 Writing Your First Top File
 ===========================
@@ -233,11 +231,11 @@ Chapter Challenge
 (http://docs.saltstack.com/ref/modules/all/salt.modules.pkg.html), and compare
 it to the pkg state documentation
 (http://docs.saltstack.com/ref/states/all/salt.states.pkg.html), note the
-differences in both the documentation, and the functionality.
+differences and similarity in both the documentation, and the functionality.
 
 2. Review some of the example projects where Salt is used
 (http://docs.saltstack.com/topics/salt_projects.html), and try to see what's
-going on, make some notes regarding what you don't understand.
+going on. Make some notes regarding what you don't understand.
 
 3. Configure the masterless minion to have a secondary HTML file, and ensure
 that the Nginx service watches this file. What do you notice is problematic

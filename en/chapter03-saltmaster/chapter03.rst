@@ -9,7 +9,6 @@ infrastructure. Our ``master`` server will be very similar spec wise to the
 for what we'll be doing. When you finish this chapter you'll have a ``master``
 server, and a single ``minion`` that you can control from the master.
 
-
 Setting Up the Salt Master
 ==========================
 
@@ -162,4 +161,10 @@ Chapter Challenge
 =================
 
 1. Create a second minion, and join it to the ``Salt Master``. Configure
-this minion 
+this minion
+
+2. Install the ``Salt Minion`` onto the ``Salt Master`` and join it to
+itself.
+
+3. Use the <iptables state> to configure the ports (4505, 4506) on the
+``Salt Master``. 
