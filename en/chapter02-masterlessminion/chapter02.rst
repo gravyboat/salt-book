@@ -136,11 +136,11 @@ you recognize that both Module and State documentation can exist for something
 that seems similar, so there's the pkg module documentation which looks like
 this: 
 
-http://docs.saltstack.com/en/latest/ref/states/all/salt.states.pkg.html
+``http://docs.saltstack.com/en/latest/ref/states/all/salt.states.pkg.html``
 
 And the pkg state module which looks like this:
 
-http://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.pkg.html
+``http://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.pkg.html``
 
 Be aware of what you're looking at, otherwise you might try to use
 functionality that doesn't exist in a ``state module`` but does exist in an
