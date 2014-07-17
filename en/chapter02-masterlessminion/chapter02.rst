@@ -47,7 +47,7 @@ If for some reason that doesn't work, you'll have to set up the repo manually:
 .. note::
 
     If you're on RHEL you'll need to enable the 'optional' repo, this is due
-    to a naming issue of with Jinja2.
+    to a naming issue of the Jinja2 package.
 
 While installing the EPEL repo you may get a key error, if so, download the
 latest key:
@@ -119,13 +119,14 @@ The difference between Salt States, and Salt Modules
 
 One of the most confusing parts of Salt for new users is the difference
 between an ``execution module`` and a ``state module``. Think of an
-``exeuction module`` as the underlying layer of actions to be performed, and
-the ``state modules`` invokes them. These different types of modules are
-commonly referred to as states, and modules (or execution modules). This can be
-confusing as a state contains multiple ``state modules``. So this
-brings about another question, why is everything that occurs in a module not
-supported in a state (or vice versa)? The reasoning behind this is that some
-things simply don't belong in states, or they wouldn't work correctly.
+``exeuction module`` as the underlying layer of actions to be performed on the
+system, and the ``state modules`` invoke them. These different types of
+modules are commonly referred to as states, and modules (or execution
+modules). This can be confusing as a state contains multiple
+``state modules``. So this brings about another question, why is everything
+that occurs in a module not supported in a state (or vice versa)? The
+reasoning behind this is that some things simply don't belong in states, or
+they wouldn't work correctly.
 
 A vast majority of actions that Salt performs are completed in States, and that
 is what 90% of what you're going to write will be. We aren't going
@@ -195,9 +196,9 @@ Writing Your First Top File
 ===========================
 
 The top file (top.sls) is quite simple in what it is, and how it works. This
-is simply a file that says 'apply these states, to these machines'. It's also
+is a file that says 'apply these states, to these machines'. It's also
 formatted with YAML, and operates similarly to a state file. Add this example
-to your server under ``/srv/salt/top.sls``:
+to your server in ``/srv/salt/top.sls``:
 
 .. code-block:: yaml
 
@@ -211,6 +212,12 @@ The star represents every server that Salt knows about. Since that is
 currently only one system, this would represent one machine. The last section
 (remember our indenting, and that ':' represents that an item has sub items),
 indicates that we want to apply the nginx state to the servers in question.
+
+Our directory structure now looks like this:
+
+``/srv/salt/``
+``/srv/salt/top.sls``
+``/srv/salt/nginx/init.sls``
 
 Chapter Overview
 ================
