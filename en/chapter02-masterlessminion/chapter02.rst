@@ -150,16 +150,31 @@ functionality that doesn't exist in a ``state module`` but does exist in an
 Writing Your First State Files and a YAML Intro
 ===============================================
 
+To begin we should discuss what a state file is. A state file is simply a
+file read by Salt which contains instructions that you wish to have performed.
+Files with the .sls extension are SaLt States (see how the S, L and S make up
+the file extension? If not, don't worry about it, just know that files with
+the .sls extension are Salt states!). Imagine the State file as a page in your
+favorite building block's instruction manual. By itself it doesn't do much but
+build a single part of the end product, but when you combine the pages and
+ensure that they're in the correct order you achive a complex design. Salt is
+just the kid eagerly waiting to start working with the instructions you're
+going to provide it with.
+
 Before we get too deep into state files, let's take a look at some YAML syntax
-with a very simple state example:
+with a very simple state(sls file) example:
 
 .. code-block:: yaml
 
-    nginx:
+    install_nginx:
       pkg:
         - installed
+        - name: nginx
+
+    start_nginx:
       service:
         - running
+        - name: nginx
         - enable: True
 
 In this state we're simply installing a package, and starting the service. It
@@ -171,7 +186,7 @@ implementation which should make it easier to see what is going on.
 
 We're specifying the item to be installed as nginx, from here, we want the
 status of the package to be installed, and the service to be running, and
-enabled. Keep in mind that states can become very complex.
+enabled.
 
 Since we want to use this nginx state, let's put it inside of
 ``/srv/salt/nginx/init.sls``. When we name something 'init' it means that Salt
@@ -190,7 +205,7 @@ reference it like this:
     salt-call --local state.sls nginx.package
 
 Easy to understand right? We're simply replacing the directory (``/``) with a
-dot and remove the extension.
+dot and removing the extension.
 
 Writing Your First Top File
 ===========================
@@ -219,6 +234,69 @@ Our directory structure now looks like this:
 ``/srv/salt/top.sls``
 ``/srv/salt/nginx/init.sls``
 
+Serving Content With Salt
+=========================
+
+So now we have Salt configured, and are able to install nginx, let's create
+another state, as well as some static content to populate it with so we can
+create an amazing plain HTML website.
+
+To begin with start by creating the directory ``/srv/salt/nginx/files``, and
+within the files directory create the index file
+ ``/srv/salt/nginx/files/index.html``.
+
+ Populate the index page with:
+
+ Hello world!
+
+ So our directory structure now looks like this:
+
+``/srv/salt/``
+``/srv/salt/top.sls``
+``/srv/salt/nginx/init.sls`` 
+``/srv/salt/nginx/files``
+``/srv/salt/nginx/files/index.html``
+
+We're almost ready to serve content, we just need a state to service it!
+Create another state ``/srv/salt/nginx/site.sls``. This state will create
+our site, and it looks like the following:
+
+include:
+  - nginx
+
+index_page:
+  file:
+    - managed
+    - name: /var/www/nginx-default/index.html #note that this may differ
+    - source: salt://nginx/files/index.html
+    - mode: 644
+    - user: root
+    - group: root
+
+So what exactly is happening here? The only truly new concept we've
+introduced is the ``source`` option, and ``include``. ``Include`` does
+exactly what it seems to do, it is used to include other states and run them
+before the current state. This means that prior to creating this index page,
+we will install the nginx package, and start the nginx service. We use the
+``name`` option to specify the location on the server where the file will be
+placed, and the ``sources`` option to say where the file is coming from on our
+Salt server. From here standard permissions and ownership is set.
+
+Run this again using:
+
+.. code-block:: yaml
+
+    salt-call --local state.sls nginx.site
+
+If the server is configured correctly you should be able to visit this page in
+a web browser.
+
+That's it, we now have a default index which nginx will serve using it's
+standard sites-enabled file. As noted above the ``name`` option may differ
+depending on the OS, as well as how nginx was installed, so make sure to
+review ``/etc/nginx/sites-enabled/default`` to ensure it's in the proper
+location.
+
 Chapter Overview
 ================
 
@@ -246,7 +324,7 @@ going on. Make some notes regarding what you don't understand.
 
 3. Configure the masterless minion to have a secondary HTML file, and ensure
 that the Nginx service watches this file. What do you notice is problematic
-about these service watch commands? Review
+about these service watch commands when we try to use them in this way? Review
 http://docs.saltstack.com/ref/states/requisites.html to see if there's a more
 efficient way we could take advantage of watch, or it's alternatives.
 
