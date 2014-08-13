@@ -55,24 +55,81 @@ From there import the repository key:
 
     wget -q -O- "http://debian.saltstack.com/debian-salt-team-joehealy.gpg.key" | apt-key add -
 
-Update the database, and install the minion:
+Update the database, and install the master:
 
 .. code-block:: bash
 
     apt-get update
-    apt-get install salt-minion
+    apt-get install salt-master
 
 Configuring Our Salt Minion and Salt Master for connectivity
 ============================================================
 
 Once you've installed your Salt Master, it's time to configure the minion to
 connect to the master server. This process is quite straight forward, but
-we'll need to make sure that ports 4505, and 4506 are open on the master. If
-you aren't familiar with how to do this, there are instructions below (you may
-need elevated privileges to run these commands):
+we'll need to make sure that the master is properly configured to allow minion
+connectivity. This includes starting the service, ensuring that it is
+listening on the appropriate ports, and opening those ports if you cannot
+connect.
 
-iptables
----------
+Starting the service
+--------------------
+
+When you installed the ``Salt Master`` package the service may have started
+automatically. Let's begin by seeing if it did, and if so, let's turn it off.
+
+Start by checking the status of the service:
+
+.. code-block:: bash
+
+    service salt-master status
+
+The service will either be running or stopped, if it's running stop it:
+
+.. code-block:: bash
+
+    service salt-master stop
+
+We've stopped the service, let's review the master config file. Just like the minion, the master config file is located within the ``/etc/salt``
+directory. In this situation the file is called master, so the full path is
+``/etc/salt/master``. Take a moment to review this file. For the time being we won't need to modify anything, and you can always review the official SaltStack documentation for example configuration files.
+
+Now that we know where the master config lives let's start the service:
+
+.. code-block:: bash
+
+    service salt-master start
+
+Our master is now started and ready to accept connections, let's start by 
+running a netstat to confirm it is listening properly:
+
+.. code-block:: bash
+
+    netstat | grep 450
+
+You should see the ``salt master`` listening on ports 4505, and 4506. These 
+ports can be modified or changed if you desire in the master conf. Just keep 
+in mind that this will require a change for all minions, as well as modified 
+firewall rules.
+
+Confirm connectivity
+--------------------
+
+Before we configure our minion to connect, it's time to confirm that we can 
+indeed connect to the master server. In a secondary terminal SSH to our 
+existing minion server and perform a telnet to both ports 4505, and 4506:
+
+.. code-block:: bash
+
+    telnet <master_ip_or_name> 4505
+    telnet <master_ip_or_name> 4506
+
+Both attempts to connect should provide a prompt which you will need to exit 
+out of. If this connection is successful feel free to skip the next section on 
+firewall configuration.
+
+Configuring iptables
+--------------------
 
 iptables -A INPUT -p tcp --dport 4505 -j ACCEPT
 iptables -A INPUT -p tcp --dport 4506 -j ACCEPT
@@ -82,12 +139,13 @@ you are having issues you may need to ensure that the iptables filtering is
 configured properly so that this chain is encountered prior to dropping all
 packets.
 
-We now need to modify the /etc/salt/minion file on the Salt minion. This will
-allow us to point our minion at the master, so we can start the authentication
-process.
 
 The minion conf
 ---------------
+
+We now need to modify the /etc/salt/minion file on the Salt minion. This will
+allow us to point our minion at the master, so we can start the authentication
+process.
 
 Open the /etc/salt/minion conf with your preferred editor, and find the line
 that says ``#master: salt``. You'll want to uncomment this line, and change
@@ -96,8 +154,8 @@ name depending on how your network is configured. Once you've done this, save
 the file, and restart the minion with ``service salt-minion restart``, again
 this may require escalated privileges if you aren't the root user.
 
-Ok, our minion now has a basic configuration, and should be able to talk to
-our Salt master, if it seems easy that's because it is supposed to be.
+Our minion now has a basic configuration, and should be able to talk to our 
+Salt master, if it seems easy that's because it is supposed to be.
 
 Accepting Keys From the Salt Minion
 ===================================
@@ -116,15 +174,12 @@ When you run this command you should see something similar to the following:
 
     return data from salt-key command
 
-
-When we use a capital ``L`` for the salt-key command, this says to list all
-keys, both those accepted, and those waiting to be accept. We now need to 
+When we use a capital ``L`` for the salt-key command, this tells Salt to list all keys, both those accepted, and those waiting to be accept. We now need to 
 accept the key, use the following command to do so:
 
 .. code-block:: bash
 
-    salt-key -a serverName
-
+    salt-key -a server_name
 
 Now if you run ``salt-key -L`` again, you'll see that the minion is now 
 accepted. To test this out we'll run the simplest command we can from
@@ -138,13 +193,29 @@ We're using the salt command here to confirm connectivity by targeting all
 ('*') machines, and running test.ping against them. This simply confirms
 the system is available via a ZeroMQ connection.
 
+You should see data output with a 'True' being returned from your minion.
+The master now has full control over the minion system, now it's time to move
+our existing content to the salt master.
+
 Moving The Salt States and Top File
 ===================================
 
 At this point we need to move our top file and states over to the master
 server. These files will exist in the exact same location that they
-currently exist on the minion, so scp the files over, and see if you can
-apply them to the minion.
+currently exist on the minion. SCP the files over and review the directory
+structure. It should look similar to the following:
+
+``/srv/salt/``
+``/srv/salt/top.sls``
+``/srv/salt/nginx/init.sls`` 
+``/srv/salt/nginx/files``
+``/srv/salt/nginx/files/index.html``
+
+This directory structure is identical to the one that existed on our minion,
+and Salt is designed this way.
+
+Applying our newly moved states to the existing minion
+------------------------------------------------------
 
 
 Introduction to Pillars
