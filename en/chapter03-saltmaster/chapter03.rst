@@ -232,10 +232,10 @@ Chapter Challenge
 =================
 
 1. Create a second minion, and join it to the ``Salt Master``. Configure
-this minion
+this minion as a secondary web server.
 
 2. Install the ``Salt Minion`` onto the ``Salt Master`` and join it to
 itself.
 
 3. Use the <iptables state> to configure the ports (4505, 4506) on the
-``Salt Master``. 
+``Salt Master`` so we ensure they're always in the correct state.
