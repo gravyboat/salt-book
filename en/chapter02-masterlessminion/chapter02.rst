@@ -124,9 +124,8 @@ system, and the ``state modules`` invoke them. These different types of
 modules are commonly referred to as states, and modules (or execution
 modules). This can be confusing as a state contains multiple
 ``state modules``. So this brings about another question, why is everything
-that occurs in a module not supported in a state (or vice versa)? The
-reasoning behind this is that some things simply don't belong in states, or
-they wouldn't work correctly.
+that occurs in a module not supported in a state (or vice versa)? It's most
+likely because someone has not yet added support.
 
 A vast majority of actions that Salt performs are completed in States, and that
 is what 90% of what you're going to write will be. We aren't going
