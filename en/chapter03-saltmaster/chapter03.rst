@@ -217,6 +217,19 @@ and Salt is designed this way.
 Applying our newly moved states to the existing minion
 ------------------------------------------------------
 
+Let's see an example of running our state on the minion:
+
+``salt 'minion_name' state.sls nginx``
+
+You should see the output (with no changes), as well as a summary of successes
+and failures.
+
+For more information when running a state, use the following:
+
+``salt 'minion_name' state.sls nginx -l debug``
+
+This will enable debug logging and provide you with additional details
+regarding what is happening.
 
 Introduction to Pillars
 =======================
@@ -226,6 +239,7 @@ secure.
 
 Introduction to Jinja2
 ======================
+
 
 
 Chapter Challenge
