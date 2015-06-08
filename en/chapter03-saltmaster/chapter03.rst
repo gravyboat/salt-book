@@ -139,7 +139,6 @@ you are having issues you may need to ensure that the iptables filtering is
 configured properly so that this chain is encountered prior to dropping all
 packets.
 
-
 The minion conf
 ---------------
 
