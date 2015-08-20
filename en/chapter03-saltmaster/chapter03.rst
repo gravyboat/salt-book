@@ -142,16 +142,16 @@ packets.
 The minion conf
 ---------------
 
-We now need to modify the /etc/salt/minion file on the Salt minion. This will
-allow us to point our minion at the master, so we can start the authentication
-process.
+We now need to modify the ``/etc/salt/minion`` file on the Salt minion.
+This will allow us to point our minion at the master, so we can start the authentication process.
 
-Open the /etc/salt/minion conf with your preferred editor, and find the line
-that says ``#master: salt``. You'll want to uncomment this line, and change
-the value of master to either your master server's IP address, or the server's
-name depending on how your network is configured. Once you've done this, save
-the file, and restart the minion with ``service salt-minion restart``, again
-this may require escalated privileges if you aren't the root user.
+Open the ``/etc/salt/minion`` conf with your preferred editor, and find the
+line that says ``#master: salt``. You'll want to uncomment this line, and
+change the value of master to either your master server's IP address, or the
+server's name depending on how your network is configured. Once you've done
+this, save the file, and restart the minion with
+``service salt-minion restart``, again this may require escalated privileges
+if you aren't the root user.
 
 Our minion now has a basic configuration, and should be able to talk to our 
 Salt master, if it seems easy that's because it is supposed to be.
