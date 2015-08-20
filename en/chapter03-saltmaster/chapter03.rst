@@ -139,7 +139,6 @@ you are having issues you may need to ensure that the iptables filtering is
 configured properly so that this chain is encountered prior to dropping all
 packets.
 
-
 The minion conf
 ---------------
 
@@ -174,8 +173,9 @@ When you run this command you should see something similar to the following:
 
     return data from salt-key command
 
-When we use a capital ``L`` for the salt-key command, this tells Salt to list all keys, both those accepted, and those waiting to be accept. We now need to 
-accept the key, use the following command to do so:
+When we use a capital ``L`` for the salt-key command, this tells Salt to list all keys,
+both those accepted, and those waiting to be accept. We now need to  accept the key,
+use the following command to do so:
 
 .. code-block:: bash
 
@@ -231,22 +231,12 @@ For more information when running a state, use the following:
 This will enable debug logging and provide you with additional details
 regarding what is happening.
 
-Introduction to Pillars
-=======================
-
-Pillars are a way which we store data within in Salt that we may need to keep
-secure.
-
-Introduction to Jinja2
-======================
-
-
 
 Chapter Challenge
 =================
 
 1. Create a second minion, and join it to the ``Salt Master``. Configure
-this minion as a secondary web server.
+this minion as a secondary web server with a different domain.
 
 2. Install the ``Salt Minion`` onto the ``Salt Master`` and join it to
 itself.
