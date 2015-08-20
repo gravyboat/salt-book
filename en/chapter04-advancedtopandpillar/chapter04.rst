@@ -32,6 +32,7 @@ Jinja. We need to start by understanding the types of delimiters that exist
 inside of Jinja. The main two types that we will be using for Salt are:
 
 Statements:
+
 .. code-block:: jinja
 
     {% %}
