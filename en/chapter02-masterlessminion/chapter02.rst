@@ -318,8 +318,9 @@ it to the pkg state documentation
 differences and similarity in both the documentation, and the functionality.
 
 2. Review some of the example projects where Salt is used
-(http://docs.saltstack.com/topics/salt_projects.html), and try to see what's
-going on. Make some notes regarding what you don't understand.
+(http://docs.saltstack.com/en/latest/topics/development/salt_projects.html),
+and try to see what's going on. Make some notes regarding what you don't
+understand.
 
 3. Configure the masterless minion to have a secondary HTML file, and ensure
 that the Nginx service watches this file. What do you notice is problematic
